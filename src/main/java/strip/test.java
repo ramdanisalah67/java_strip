@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
 import com.stripe.model.Customer;
 import com.stripe.model.Token;
 
@@ -40,6 +41,13 @@ public class test {
 		Map <String,Object> source =new HashMap<String, Object>();
 		 source.put("source", token.getId());
 		 c.create(source)	;*/
+		 
+		 //charge customer
+		 Map <String,Object> chargeParam =new HashMap<String, Object>();
+		 chargeParam.put("amount", "500");
+		 chargeParam.put("currency", "usd");
+		 chargeParam.put("customer", c.getId());
+		 Charge.create(chargeParam);
 		 
 		 Gson json = new GsonBuilder().setPrettyPrinting().create();
 		 System.out.println(json.toJson(c));
